@@ -1,0 +1,104 @@
+:root{
+
+    /* Spacings */
+    --spacingSm: 4px;
+    --spacingMd: 8px;
+    --spacingLg: 12px;
+
+    /* Radiuses */
+    --radiusSm: 4px;
+    --radiusMd: 8px;
+    --radiusLg: 12px;
+
+    /* Colors */
+    --backgroundClr: rgb(241, 241, 241);
+    --cardClr: rgb(212, 212, 212);
+    --beamClr: brown;
+    --fulcrumClr: black;
+
+}
+
+*{
+    font-family: "Archivo", sans-serif;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#mainContent{
+    max-width: 1200px;
+    background-color: var(--backgroundClr);
+    border-radius: var(--radiusLg);
+    padding: var(--spacingLg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacingLg);
+}
+
+#statsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+    gap: var(--spacingMd);
+}
+
+.statCard{
+    min-width: 180px;
+    background-color: var(--cardClr);
+    padding: var(--spacingMd);
+    border-radius: var(--radiusMd);
+    text-align: center;
+}
+
+#beam{
+    background-color: var(--beamClr);
+    border-radius: var(--radiusMd);
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 16px;
+    width: 500px;
+}
+
+#fulcrum{
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-right: 20px solid transparent;
+    border-left: 20px solid transparent;
+    border-bottom: 20px solid var(--fulcrumClr);
+}
+
+#seesaw{
+    height: 500px;
+    min-width: 500px;
+    position: relative;
+}
+
+#resetBtn{
+    font-size: 16px;
+    background-color: var(--cardClr);
+    border-style: none;
+    padding: var(--spacingMd);
+    border-radius: var(--radiusMd);
+    cursor: pointer;
+}
+
+#resetBtn:active{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
