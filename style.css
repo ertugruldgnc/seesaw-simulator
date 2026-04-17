@@ -70,7 +70,7 @@ body{
     height: 16px;
     width: 500px;
     transform: translateX(-50%);
-    transition: transform 0.5s ease-in-out;
+    transition: transform 1s linear;
     transform-origin: center; 
     cursor: pointer;
 }
@@ -113,4 +113,8 @@ body{
     transform:translateX(-50%);
     bottom: 150px;
     transition: transform 0.3s linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
