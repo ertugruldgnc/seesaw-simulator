@@ -65,18 +65,21 @@ body{
     background-color: var(--beamClr);
     border-radius: var(--radiusMd);
     position: absolute;
-    bottom: 100px;
+    bottom: 150px;
     left: 50%;
-    transform: translateX(-50%);
     height: 16px;
     width: 500px;
+    transform: translateX(-50%);
+    transition: transform 0.5s ease-in-out;
+    transform-origin: center; 
+    cursor: pointer;
 }
 
 #fulcrum{
     height: 0px;
     width: 0px;
     position: absolute;
-    bottom: 80px;
+    bottom: 130px;
     left: 50%;
     transform: translateX(-50%);
     border-right: 20px solid transparent;
@@ -90,7 +93,7 @@ body{
     position: relative;
 }
 
-#resetBtn{
+.buttons{
     font-size: 16px;
     background-color: var(--cardClr);
     border-style: none;
@@ -99,6 +102,15 @@ body{
     cursor: pointer;
 }
 
-#resetBtn:active{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+.buttons:active{
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
+}
+
+.weight{
+    pointer-events: none;
+    border-radius: 50%;
+    position: absolute;
+    transform:translateX(-50%);
+    bottom: 150px;
+    transition: transform 0.3s linear;
 }
