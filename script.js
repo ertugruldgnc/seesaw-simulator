@@ -146,6 +146,7 @@ resetBtn.addEventListener("click", () => {
     rightSideWeight = 0;
     leftSide = [];
     rightSide = [];
+    weights = [];
     leftSideTorque = 0;
     rightSideTorque = 0;
 
@@ -189,6 +190,45 @@ function saveWeight(){
         rightSide.push(weightData);
 
     }
+
+}
+
+/* Load From Local Storage */
+function loadWeights(){
+
+    weights = JSON.parse(localStorage.getItem("weights"));
+
+    weights.forEach(item => {
+
+        const weight = document.createElement("div");
+        weight.textContent = item.kg;
+        weight.className = "weight";
+        weight.style.left = `calc(50% + (${item.position * 50}%))`;
+        weight.style.bottom = "16px";
+        weight.style.height = `${(item.kg*3)+50}px`;
+        weight.style.width = `${(item.kg*3)+50}px`;
+        weight.style.backgroundColor = weightColors[item.kg - 1];
+
+        beam.appendChild(weight);
+
+        if (item.position < 0) {
+
+            leftSide.push(item);
+            leftSideWeight += item.kg;
+            
+        } else if (item.position > 0) {
+            
+            rightSide.push(item);
+            rightSideWeight += item.kg;
+            
+        }
+
+        addAction(weights)
+    });
+
+    displayStats();
+    calculateTorque();
+    beamMovement();
 
 }
 
@@ -268,45 +308,6 @@ function addAction(weights){
     
         actionsContainer.prepend(action)
     });
-
-}
-
-/* Load From Local Storage */
-function loadWeights(){
-
-    weights = JSON.parse(localStorage.getItem("weights"));
-
-    weights.forEach(item => {
-
-        const weight = document.createElement("div");
-        weight.textContent = item.kg;
-        weight.className = "weight";
-        weight.style.left = `calc(50% + (${item.position * 50}%))`;
-        weight.style.bottom = "16px";
-        weight.style.height = `${(item.kg*3)+50}px`;
-        weight.style.width = `${(item.kg*3)+50}px`;
-        weight.style.backgroundColor = weightColors[item.kg - 1];
-
-        beam.appendChild(weight);
-
-        if (item.position < 0) {
-
-            leftSide.push(item);
-            leftSideWeight += item.kg;
-            
-        } else if (item.position > 0) {
-            
-            rightSide.push(item);
-            rightSideWeight += item.kg;
-            
-        }
-
-        addAction(weights)
-    });
-
-    displayStats();
-    calculateTorque();
-    beamMovement();
 
 }
 
