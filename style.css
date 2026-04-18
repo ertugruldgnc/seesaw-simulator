@@ -118,3 +118,19 @@ body{
     align-items: center;
     color: white;
 }
+
+#actionsContainer{
+    padding: var(--spacingSm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacingSm);
+    height: 150px;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.action{
+    background-color: var(--cardClr);
+    border-radius: var(--radiusSm);
+    padding: var(--spacingSm);
+}

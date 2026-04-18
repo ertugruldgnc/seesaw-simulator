@@ -10,6 +10,7 @@ const seesaw = document.querySelector("#seesaw");
 const beam = document.querySelector("#beam");
 const resetBtn = document.querySelector("#resetBtn");
 const muteBtn = document.querySelector("#muteBtn");
+const actionsContainer = document.querySelector("#actionsContainer")
 
 /* Variables */
 let leftSideTorque = 0;
@@ -75,9 +76,9 @@ function displayStats() {
 /* Mouse Positioon */
 beam.addEventListener("mousemove", (event) => {
 
-    let beamLocation = beam.getBoundingClientRect();
-    let xAxis = event.clientX - beamLocation.left;
+    const beamLocation = beam.getBoundingClientRect();
     const width = beamLocation.width;
+    let xAxis = event.clientX - beamLocation.left;
 
     position = ((xAxis / width) * 2 - 1).toFixed(2);
 
@@ -108,6 +109,7 @@ beam.addEventListener("click", () => {
     displayStats();
     calculateTorque();
     beamMovement();
+    addAction(weights);
 
     requestAnimationFrame(() => {
 
@@ -156,7 +158,15 @@ resetBtn.addEventListener("click", () => {
     localStorage.clear();
 
     document.querySelectorAll(".weight").forEach(item => {
+
         item.remove();
+
+    });
+    
+    document.querySelectorAll(".action").forEach(item => {
+
+        item.remove();
+
     });
 
     randomlyWeight();
@@ -226,12 +236,48 @@ function beamMovement() {
     }
 }
 
+/* Add Action */
+function addAction(weights){
+
+    const action = document.createElement("div");
+    action.className = "action"
+
+    const beamLocation = beam.getBoundingClientRect();
+    const width = beamLocation.width;
+
+    weights.forEach(item => {
+
+        const weight = item.kg
+        const position = item.position
+
+        const distance = parseInt(Math.abs(position * (width / 2)))
+    
+        if(position < 0){
+    
+            action.textContent = `${weight} kg weight placed ${distance} px left of the pivot`;
+    
+        } else if (position > 0){
+    
+            action.textContent = `${weight} kg weight placed ${distance} px right of the pivot`;
+            
+        } else if (parseInt(position) === 0){
+            
+            action.textContent = `${weight} kg weight placed at the pivot`;
+    
+        }
+    
+        actionsContainer.prepend(action)
+    });
+
+}
+
 /* Load From Local Storage */
 function loadWeights(){
 
     weights = JSON.parse(localStorage.getItem("weights"));
 
     weights.forEach(item => {
+
         const weight = document.createElement("div");
         weight.textContent = item.kg;
         weight.className = "weight";
@@ -247,13 +293,15 @@ function loadWeights(){
 
             leftSide.push(item);
             leftSideWeight += item.kg;
-
+            
         } else if (item.position > 0) {
-
+            
             rightSide.push(item);
             rightSideWeight += item.kg;
-
+            
         }
+
+        addAction(weights)
     });
 
     displayStats();
