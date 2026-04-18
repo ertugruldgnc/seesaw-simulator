@@ -260,7 +260,7 @@ function beamMovement() {
 
     if(leftSideTorque === rightSideTorque){
 
-        beam.style.transform = "translateX(-50%)";
+        beam.style.transform = "translateX(-50%) rotate(0deg)";
         angleStat.textContent = "0°";
 
     } else if(leftSideTorque < rightSideTorque){
